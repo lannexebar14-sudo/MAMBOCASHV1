@@ -1,1 +1,1 @@
-{"rewrites":[{"source":"/control.html","destination":"/remote.html"}]}
+{"rewrites":[{"source":"/control.html","destination":"/remote.html"},{"source":"/style.css","destination":"/neon.css"}]}
