@@ -1,1 +1,1 @@
-{"rewrites":[{"source":"/","destination":"/index.html"},{"source":"/control.html","destination":"/remote.html"},{"source":"/style.css","destination":"/neon.css"}]}
+{"rewrites":[{"source":"/","destination":"/index.html"},{"source":"/control.html","destination":"/remote.html"}]}
