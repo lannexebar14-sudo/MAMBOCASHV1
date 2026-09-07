@@ -3,58 +3,89 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>NIGHTQUIZ — Activation administrateur</title>
+  <title>NIGHTQUIZ — Super Admin</title>
   <link rel="stylesheet" href="./nightquiz-live.css">
   <style>
-    body{min-height:100vh;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at 50% 0,#281848,transparent 34%),#09090e}
-    .admin-card{width:min(480px,100%);background:#111117;border:1px solid #2e2d38;border-radius:22px;padding:28px;box-shadow:0 30px 100px #0008}
-    .admin-card h1{font-size:32px;margin:18px 0 6px;letter-spacing:-.04em}.admin-card .btn{width:100%;margin-top:12px}
-    .admin-badge{display:inline-block;margin-top:18px;padding:7px 11px;border-radius:99px;background:#21172e;color:#b997ff;font-size:10px;font-weight:900}
+    body{margin:0;background:#09090e;color:#f6f5fb;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}.hidden{display:none!important}
+    .loginPage{min-height:100vh;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at 50% 0,#281848,transparent 34%),#09090e}.loginCard{width:min(470px,100%);background:#111117;border:1px solid #2e2d38;border-radius:22px;padding:28px;box-shadow:0 30px 100px #0008}.loginCard h1{font-size:32px;margin:18px 0 6px;letter-spacing:-.04em}.loginCard .btn{width:100%;margin-top:10px}.adminBadge{display:inline-block;margin-top:18px;padding:7px 11px;border-radius:99px;background:#21172e;color:#b997ff;font-size:10px;font-weight:900}
+    .adminShell{display:flex;min-height:100vh}.adminSide{position:fixed;inset:0 auto 0 0;width:250px;background:#0d0d13;border-right:1px solid #282832;padding:22px 14px;z-index:5}.adminIdentity{margin:23px 0 18px;padding:13px;background:#17171f;border:1px solid #2d2d38;border-radius:12px}.adminIdentity small{display:block;color:#777582;margin-top:5px;overflow:hidden;text-overflow:ellipsis}.adminMenu{display:grid;gap:5px}.adminMenu button{border:0;background:transparent;color:#888694;text-align:left;padding:12px;border-radius:9px;font-weight:750}.adminMenu button:hover,.adminMenu button.on{background:#1a1a22;color:#fff}.adminLogout{position:absolute;left:14px;right:14px;bottom:18px}.adminMain{margin-left:250px;width:calc(100% - 250px);padding:34px;min-width:0}.adminHead{display:flex;align-items:end;justify-content:space-between;gap:18px}.adminHead h1{font-size:34px;margin:7px 0 4px;letter-spacing:-.04em}.adminHeadActions{display:flex;gap:8px;flex-wrap:wrap}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:24px 0}.kpi{background:#15151c;border:1px solid #2b2b35;border-radius:14px;padding:18px}.kpi small{font-size:9px;color:#777582}.kpi b{display:block;font-size:30px;margin-top:6px}.kpi em{font-style:normal;font-size:10px;color:#918da0}.adminGrid{display:grid;grid-template-columns:1.35fr .85fr;gap:10px}.panel{background:#121218;border:1px solid #292933;border-radius:16px;padding:18px;min-width:0}.panelHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:13px}.panelHead h3{margin:0;font-size:17px}.filters{display:flex;gap:8px;flex-wrap:wrap}.search{min-width:220px;background:#191920;border:1px solid #33333d;color:#fff;border-radius:9px;padding:10px 12px}.select{background:#191920;border:1px solid #33333d;color:#fff;border-radius:9px;padding:10px 12px}.clientTable{width:100%;border-collapse:collapse}.clientTable th,.clientTable td{text-align:left;padding:12px 8px;border-bottom:1px solid #282832;font-size:12px;vertical-align:middle}.clientTable th{font-size:9px;color:#777582}.clientName{font-weight:850}.clientMail{font-size:10px;color:#7f7c8a;margin-top:3px}.status{display:inline-flex;align-items:center;gap:6px;border-radius:99px;padding:5px 8px;font-size:9px;font-weight:900;background:#211a2d;color:#bea9ed}.status:before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}.status.active{background:#11251d;color:#65d7a2}.status.trialing{background:#211a2d;color:#bea9ed}.status.paused,.status.unpaid,.status.canceled,.status.past_due{background:#2a1719;color:#ef8f98}.clientBtn{padding:8px 10px;font-size:10px}.empty{text-align:center;padding:44px 20px;color:#777582}.activity{display:grid;gap:8px}.activityItem{display:flex;gap:10px;align-items:flex-start;padding:11px;border-radius:11px;background:#17171f}.activityDot{width:9px;height:9px;border-radius:50%;background:#9b74ff;margin-top:5px;flex:0 0 auto}.activityItem b{font-size:11px}.activityItem p{font-size:10px;color:#777582;margin:3px 0 0}.activityItem time{margin-left:auto;color:#64616d;font-size:9px;white-space:nowrap}.modal{position:fixed;inset:0;background:#000b;display:grid;place-items:center;padding:20px;z-index:50}.modalCard{width:min(720px,100%);max-height:92vh;overflow:auto;background:#111117;border:1px solid #34333e;border-radius:20px;padding:24px;box-shadow:0 30px 100px #000}.modalTop{display:flex;justify-content:space-between;gap:15px;align-items:flex-start}.modalTop h2{margin:4px 0;font-size:28px}.modalClose{border:0;background:#1b1b23;color:#fff;border-radius:9px;width:38px;height:38px}.detailStats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:18px 0}.detailStats div{background:#181820;border:1px solid #2e2e38;border-radius:11px;padding:12px}.detailStats small{display:block;color:#777582;font-size:8px}.detailStats b{display:block;margin-top:5px}.formGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.formGrid .field{margin:5px 0}.switchLine{display:flex;align-items:center;justify-content:space-between;padding:13px;background:#181820;border:1px solid #2e2e38;border-radius:11px;margin:10px 0}.switchLine input{width:20px;height:20px}.quickActions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.dangerBtn{border-color:#5a2f34;color:#ffabb2}.saveLine{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}.toast{position:fixed;right:22px;top:22px;z-index:100;background:#15151c;border:1px solid #363540;border-radius:12px;padding:13px 16px;box-shadow:0 15px 50px #0008;font-size:12px}.toast.ok{border-color:#2e6d53;color:#74d9ac}.toast.bad{border-color:#6d343b;color:#ff9ca6}.auditTable{width:100%;border-collapse:collapse}.auditTable td{padding:11px 8px;border-bottom:1px solid #282832;font-size:11px}.adminNote{padding:12px;border:1px solid #3a2d4d;background:#181321;border-radius:10px;color:#c7b6e9;font-size:11px;line-height:1.6}
+    @media(max-width:1000px){.kpis{grid-template-columns:repeat(2,1fr)}.adminGrid{grid-template-columns:1fr}.detailStats{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:720px){.adminSide{width:70px}.adminSide .logo,.adminIdentity,.adminMenu button span{display:none}.adminMenu button{text-align:center;font-size:20px}.adminMain{margin-left:70px;width:calc(100% - 70px);padding:18px}.adminHead{align-items:flex-start;flex-direction:column}.kpis,.formGrid{grid-template-columns:1fr}.clientTable th:nth-child(3),.clientTable td:nth-child(3),.clientTable th:nth-child(4),.clientTable td:nth-child(4){display:none}.search{min-width:0;width:100%}.filters{width:100%}}
   </style>
 </head>
 <body>
-  <main class="admin-card">
-    <b class="logo">NIGHT<i>QUIZ</i></b>
-    <div class="admin-badge">SUPER ADMIN · ACTIVATION</div>
-    <h1>Créer l’accès administrateur</h1>
-    <p class="muted">Cette page est réservée à l’adresse administrateur autorisée dans NIGHTQUIZ.</p>
-    <form id="adminForm">
-      <div class="field">
-        <label>ADRESSE E-MAIL</label>
-        <input id="email" type="email" autocomplete="email" required>
-      </div>
-      <div class="field">
-        <label>MOT DE PASSE</label>
-        <input id="password" type="password" autocomplete="new-password" minlength="8" required>
-      </div>
-      <div id="message" class="notice" style="display:none"></div>
-      <button class="btn primary" id="submit" type="submit">Activer mon accès administrateur</button>
-    </form>
-    <a class="btn ghost" style="display:block;text-align:center;margin-top:10px" href="./">← Retour à NIGHTQUIZ</a>
-  </main>
+  <section id="loginPage" class="loginPage">
+    <main class="loginCard">
+      <b class="logo">NIGHT<i>QUIZ</i></b>
+      <div class="adminBadge">SUPER ADMIN</div>
+      <h1>Administration NIGHTQUIZ</h1>
+      <p class="muted">Connexion réservée à l’administration globale de la plateforme.</p>
+      <form id="loginForm">
+        <div class="field"><label>ADRESSE E-MAIL</label><input id="loginEmail" type="email" autocomplete="email" required></div>
+        <div class="field"><label>MOT DE PASSE</label><input id="loginPassword" type="password" autocomplete="current-password" minlength="8" required></div>
+        <div id="loginMessage" class="notice" style="display:none"></div>
+        <button class="btn primary" id="loginSubmit" type="submit">Se connecter</button>
+      </form>
+      <a class="btn ghost" style="display:block;text-align:center;margin-top:10px" href="./">← Retour au site</a>
+    </main>
+  </section>
+
+  <section id="adminPage" class="hidden">
+    <div class="adminShell">
+      <aside class="adminSide">
+        <b class="logo">NIGHT<i>QUIZ</i></b>
+        <div class="adminIdentity"><b>Super Admin</b><small id="adminEmail">—</small></div>
+        <nav class="adminMenu" id="adminMenu">
+          <button class="on" data-tab="overview"><b>⌂</b> <span>Vue générale</span></button>
+          <button data-tab="clients"><b>▦</b> <span>Clients & abonnements</span></button>
+          <button data-tab="activity"><b>↗</b> <span>Activité</span></button>
+        </nav>
+        <button class="btn adminLogout" id="logout"><span>⇥ Déconnexion</span></button>
+      </aside>
+      <main class="adminMain" id="adminMain"></main>
+    </div>
+  </section>
+
+  <div id="clientModal" class="modal hidden"><div class="modalCard" id="clientModalCard"></div></div>
+  <div id="toast" class="toast hidden"></div>
+
   <script type="module">
     import{createClient}from'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/+esm';
     const sb=createClient('https://otgubsvmcbaocrndngrq.supabase.co','sb_publishable__d50uWZVhfLcfzHv70ZOSA_QySE92AW',{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
-    const form=document.getElementById('adminForm'),message=document.getElementById('message'),button=document.getElementById('submit');
-    const allowed='lannexebar14@icloud.com';
-    form.addEventListener('submit',async e=>{
-      e.preventDefault();
-      message.style.display='none';message.classList.remove('success');
-      const email=document.getElementById('email').value.trim().toLowerCase();
-      const password=document.getElementById('password').value;
-      if(email!==allowed){message.textContent='Cette adresse n’est pas autorisée comme administrateur NIGHTQUIZ.';message.style.display='block';return;}
-      button.disabled=true;button.textContent='Activation…';
-      try{
-        const{data,error}=await sb.auth.signUp({email,password,options:{data:{pseudo:'Admin NIGHTQUIZ'}}});
-        if(error)throw error;
-        if(data.session){message.textContent='Accès administrateur activé. Redirection…';message.classList.add('success');message.style.display='block';setTimeout(()=>location.href='./',700);}
-        else{message.textContent='Compte créé. Confirmez l’adresse e-mail reçue, puis revenez sur NIGHTQUIZ et cliquez sur Connexion.';message.classList.add('success');message.style.display='block';}
-      }catch(err){
-        const text=String(err?.message||'Impossible de créer le compte.');
-        message.textContent=text.toLowerCase().includes('already')?'Ce compte existe déjà. Retournez sur NIGHTQUIZ et utilisez Connexion.':text;
-        message.style.display='block';
-      }finally{button.disabled=false;button.textContent='Activer mon accès administrateur';}
-    });
+    const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+    const A={user:null,tab:'overview',overview:null,clients:[],activity:[],selected:null,search:'',filter:'all'};
+    const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+    const date=v=>v?new Date(v).toLocaleDateString('fr-FR'):'—';
+    const dateTime=v=>v?new Date(v).toLocaleString('fr-FR',{dateStyle:'short',timeStyle:'short'}):'—';
+    const inputDate=v=>v?new Date(v).toISOString().slice(0,10):'';
+    const plural=(n,s,p)=>n+' '+(n>1?p:s);
+    function toast(text,ok=true){const t=$('#toast');t.textContent=text;t.className='toast '+(ok?'ok':'bad');setTimeout(()=>t.classList.add('hidden'),2800)}
+    function showLogin(message=''){ $('#adminPage').classList.add('hidden');$('#loginPage').classList.remove('hidden');if(message){$('#loginMessage').textContent=message;$('#loginMessage').style.display='block'} }
+    function showAdmin(){ $('#loginPage').classList.add('hidden');$('#adminPage').classList.remove('hidden');$('#adminEmail').textContent=A.user?.email||'Super Admin';render() }
+    async function isSuper(){const{data,error}=await sb.rpc('nightquiz_admin_is_super');if(error)return false;return data===true}
+    async function loadData(){const[o,c,a]=await Promise.all([sb.rpc('nightquiz_admin_overview'),sb.rpc('nightquiz_admin_clients'),sb.rpc('nightquiz_admin_recent_activity',{p_limit:40})]);if(o.error)throw o.error;if(c.error)throw c.error;if(a.error)throw a.error;A.overview=o.data?.[0]||{clients_total:0,trialing:0,active:0,suspended:0,sessions_total:0,players_total:0,screens_total:0};A.clients=c.data||[];A.activity=a.data||[]}
+    async function boot(){const{data:{session}}=await sb.auth.getSession();if(!session){showLogin();return}A.user=session.user;if(!await isSuper()){await sb.auth.signOut();showLogin('Ce compte n’est pas autorisé comme Super Admin NIGHTQUIZ.');return}try{await loadData();showAdmin()}catch(e){showLogin(e.message||'Impossible de charger le back-office.')}}
+    $('#loginForm').addEventListener('submit',async e=>{e.preventDefault();const b=$('#loginSubmit'),m=$('#loginMessage');m.style.display='none';b.disabled=true;b.textContent='Connexion…';try{const{data,error}=await sb.auth.signInWithPassword({email:$('#loginEmail').value.trim(),password:$('#loginPassword').value});if(error)throw error;A.user=data.user;if(!await isSuper()){await sb.auth.signOut();throw new Error('Ce compte n’est pas autorisé comme Super Admin NIGHTQUIZ.')}await loadData();showAdmin()}catch(err){m.textContent=err.message||'Connexion impossible.';m.style.display='block'}finally{b.disabled=false;b.textContent='Se connecter'}});
+    $('#logout').onclick=async()=>{await sb.auth.signOut();A.user=null;showLogin()};
+    $('#adminMenu').addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(!b)return;A.tab=b.dataset.tab;$$('#adminMenu button').forEach(x=>x.classList.toggle('on',x===b));render()});
+    function head(title,sub,actions=''){return`<header class="adminHead"><div><span class="pill">SUPER ADMIN NIGHTQUIZ</span><h1>${title}</h1><p class="muted">${sub}</p></div><div class="adminHeadActions">${actions}</div></header>`}
+    function statusLabel(s){return({trialing:'Essai',active:'Actif',past_due:'Paiement en attente',canceled:'Résilié',unpaid:'Impayé',paused:'Suspendu'})[s]||s}
+    function overview(){const o=A.overview||{};return head('Vue générale','Pilotage global de la plateforme.','<button class="btn" id="refresh">↻ Actualiser</button><button class="btn primary" data-go="clients">Gérer les clients</button>')+`<div class="kpis"><div class="kpi"><small>CLIENTS</small><b>${o.clients_total||0}</b><em>établissements créés</em></div><div class="kpi"><small>ESSAIS EN COURS</small><b>${o.trialing||0}</b><em>période gratuite</em></div><div class="kpi"><small>ABONNEMENTS ACTIFS</small><b>${o.active||0}</b><em>accès payant actif</em></div><div class="kpi"><small>ACCÈS SUSPENDUS</small><b>${o.suspended||0}</b><em>pause, impayé ou résiliation</em></div></div><div class="adminGrid"><section class="panel"><div class="panelHead"><h3>Clients récents</h3><button class="btn clientBtn" data-go="clients">Voir tous</button></div>${clientTable(A.clients.slice(0,8),true)}</section><section class="panel"><div class="panelHead"><h3>Utilisation</h3></div><div class="detailStats"><div><small>PARTIES</small><b>${o.sessions_total||0}</b></div><div><small>JOUEURS</small><b>${o.players_total||0}</b></div><div><small>ÉCRANS TV</small><b>${o.screens_total||0}</b></div><div><small>CLIENTS ACTIFS</small><b>${o.active||0}</b></div></div><div class="adminNote">Les changements d’abonnement effectués ici agissent directement sur les droits d’accès du client. Stripe n’est pas encore branché : les changements sont donc administratifs/manuels pour le moment.</div><div class="panelHead" style="margin-top:18px"><h3>Dernière activité</h3></div>${activityList(A.activity.slice(0,6))}</section></div>`}
+    function filteredClients(){const q=A.search.trim().toLowerCase();return A.clients.filter(c=>(A.filter==='all'||c.subscription_status===A.filter)&&(!q||[c.name,c.owner_email,c.slug,c.plan_code].some(v=>String(v||'').toLowerCase().includes(q))))}
+    function clientsPage(){return head('Clients & abonnements','Gérez les essais, plans et droits d’accès.','<button class="btn" id="refresh">↻ Actualiser</button>')+`<section class="panel" style="margin-top:24px"><div class="panelHead"><h3>${A.clients.length} client${A.clients.length>1?'s':''}</h3><div class="filters"><input class="search" id="searchClient" value="${esc(A.search)}" placeholder="Rechercher un établissement…"><select class="select" id="statusFilter"><option value="all">Tous les statuts</option>${['trialing','active','past_due','paused','unpaid','canceled'].map(s=>`<option value="${s}" ${A.filter===s?'selected':''}>${statusLabel(s)}</option>`).join('')}</select></div></div><div id="clientTableWrap">${clientTable(filteredClients())}</div></section>`}
+    function clientTable(rows,compact=false){if(!rows.length)return'<div class="empty">Aucun client pour le moment.</div>';return`<div style="overflow:auto"><table class="clientTable"><thead><tr><th>ÉTABLISSEMENT</th><th>STATUT</th><th>PLAN</th><th>ÉCHÉANCE</th><th>UTILISATION</th><th></th></tr></thead><tbody>${rows.map(c=>`<tr><td><div class="clientName">${esc(c.name)}</div><div class="clientMail">${esc(c.owner_email||'Aucun e-mail')}</div></td><td><span class="status ${esc(c.subscription_status)}">${statusLabel(c.subscription_status)}</span></td><td>${esc((c.plan_code||'—').toUpperCase())}</td><td>${c.subscription_status==='trialing'?date(c.trial_ends_at):date(c.current_period_end)}</td><td>${compact?plural(c.sessions_count||0,'partie','parties'):`${c.spaces_count||0} esp. · ${c.screens_count||0} TV · ${c.sessions_count||0} parties`}</td><td><button class="btn clientBtn" data-client="${c.establishment_id}">Gérer</button></td></tr>`).join('')}</tbody></table></div>`}
+    function activityList(rows){if(!rows.length)return'<div class="empty">Aucune activité enregistrée.</div>';return`<div class="activity">${rows.map(x=>`<div class="activityItem"><span class="activityDot"></span><div><b>${esc(x.label)}</b><p>${esc(x.establishment_name||'Administration NIGHTQUIZ')}</p></div><time>${dateTime(x.event_at)}</time></div>`).join('')}</div>`}
+    function activityPage(){return head('Activité','Historique des créations de clients, parties et actions administratives.','<button class="btn" id="refresh">↻ Actualiser</button>')+`<section class="panel" style="margin-top:24px">${activityList(A.activity)}</section>`}
+    function render(){if(A.tab==='overview')$('#adminMain').innerHTML=overview();else if(A.tab==='clients')$('#adminMain').innerHTML=clientsPage();else $('#adminMain').innerHTML=activityPage();bindPage()}
+    function bindPage(){const r=$('#refresh');if(r)r.onclick=refresh;$$('[data-go]').forEach(b=>b.onclick=()=>{A.tab=b.dataset.go;$$('#adminMenu button').forEach(x=>x.classList.toggle('on',x.dataset.tab===A.tab));render()});$$('[data-client]').forEach(b=>b.onclick=()=>openClient(b.dataset.client));const s=$('#searchClient'),f=$('#statusFilter');if(s)s.oninput=e=>{A.search=e.target.value;$('#clientTableWrap').innerHTML=clientTable(filteredClients());$$('[data-client]').forEach(b=>b.onclick=()=>openClient(b.dataset.client))};if(f)f.onchange=e=>{A.filter=e.target.value;$('#clientTableWrap').innerHTML=clientTable(filteredClients());$$('[data-client]').forEach(b=>b.onclick=()=>openClient(b.dataset.client))}}
+    async function refresh(){try{await loadData();render();toast('Données actualisées')}catch(e){toast(e.message||'Actualisation impossible',false)}}
+    function openClient(id){const c=A.clients.find(x=>x.establishment_id===id);if(!c)return;A.selected=c;const m=$('#clientModalCard');m.innerHTML=`<div class="modalTop"><div><span class="status ${esc(c.subscription_status)}">${statusLabel(c.subscription_status)}</span><h2>${esc(c.name)}</h2><p class="muted">${esc(c.owner_email||'Aucun e-mail')} · créé le ${date(c.created_at)}</p></div><button class="modalClose" id="modalClose">×</button></div><div class="detailStats"><div><small>ESPACES</small><b>${c.spaces_count||0}</b></div><div><small>ÉCRANS TV</small><b>${c.screens_count||0}</b></div><div><small>PARTIES</small><b>${c.sessions_count||0}</b></div><div><small>JOUEURS</small><b>${c.players_count||0}</b></div></div><div class="formGrid"><div class="field"><label>STATUT</label><select class="select" style="width:100%" id="editStatus">${['trialing','active','past_due','paused','unpaid','canceled'].map(s=>`<option value="${s}" ${c.subscription_status===s?'selected':''}>${statusLabel(s)}</option>`).join('')}</select></div><div class="field"><label>PLAN</label><select class="select" style="width:100%" id="editPlan"><option value="">Aucun</option>${['STARTER','PRO','PREMIUM','CUSTOM'].map(p=>`<option value="${p}" ${(c.plan_code||'').toUpperCase()===p?'selected':''}>${p}</option>`).join('')}</select></div><div class="field"><label>FIN DE L’ESSAI</label><input id="editTrialEnd" type="date" value="${inputDate(c.trial_ends_at)}"></div><div class="field"><label>FIN DE PÉRIODE ABONNEMENT</label><input id="editPeriodEnd" type="date" value="${inputDate(c.current_period_end)}"></div></div><div class="switchLine"><div><b>Compte activé</b><div class="muted">Désactiver bloque immédiatement l’accès au quiz.</div></div><input id="editEnabled" type="checkbox" ${c.enabled?'checked':''}></div><div class="quickActions"><button class="btn" data-extend="7">+7 jours d’essai</button><button class="btn" data-extend="14">+14 jours</button><button class="btn" data-extend="30">+30 jours</button><button class="btn dangerBtn" id="toggleAccess">${c.enabled?'Suspendre le compte':'Réactiver le compte'}</button></div><div class="adminNote">Accès actuel : <b>${c.access_active?'AUTORISÉ':'BLOQUÉ'}</b>. Un abonnement <b>active</b> avec compte activé donne accès à la plateforme ; un essai <b>trialing</b> reste actif jusqu’à sa date de fin.</div><div class="saveLine"><button class="btn" id="cancelModal">Annuler</button><button class="btn primary" id="saveClient">Enregistrer</button></div>`;$('#clientModal').classList.remove('hidden');$('#modalClose').onclick=closeModal;$('#cancelModal').onclick=closeModal;$('#toggleAccess').onclick=()=>{$('#editEnabled').checked=!$('#editEnabled').checked;$('#toggleAccess').textContent=$('#editEnabled').checked?'Suspendre le compte':'Réactiver le compte'};$$('[data-extend]').forEach(b=>b.onclick=()=>extendTrial(Number(b.dataset.extend)));$('#saveClient').onclick=saveClient}
+    function closeModal(){$('#clientModal').classList.add('hidden');A.selected=null}
+    $('#clientModal').addEventListener('click',e=>{if(e.target.id==='clientModal')closeModal()});
+    async function extendTrial(days){if(!A.selected)return;try{const{error}=await sb.rpc('nightquiz_admin_extend_trial',{p_establishment_id:A.selected.establishment_id,p_days:days});if(error)throw error;toast(`Essai prolongé de ${days} jours`);await loadData();const id=A.selected.establishment_id;A.selected=A.clients.find(x=>x.establishment_id===id);openClient(id);render()}catch(e){toast(e.message||'Prolongation impossible',false)}}
+    async function saveClient(){if(!A.selected)return;const b=$('#saveClient');b.disabled=true;b.textContent='Enregistrement…';try{const trial=$('#editTrialEnd').value,period=$('#editPeriodEnd').value;const payload={p_establishment_id:A.selected.establishment_id,p_status:$('#editStatus').value,p_plan_code:$('#editPlan').value,p_enabled:$('#editEnabled').checked,p_trial_ends_at:trial?new Date(trial+'T23:59:59').toISOString():null,p_current_period_end:period?new Date(period+'T23:59:59').toISOString():null};const{error}=await sb.rpc('nightquiz_admin_update_client',payload);if(error)throw error;toast('Client mis à jour');closeModal();await loadData();render()}catch(e){toast(e.message||'Modification impossible',false)}finally{b.disabled=false;b.textContent='Enregistrer'}}
+    sb.auth.onAuthStateChange((_event,session)=>{if(!session&&A.user)showLogin()});
+    boot();
   </script>
 </body>
 </html>
