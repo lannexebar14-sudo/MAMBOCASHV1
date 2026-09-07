@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>NIGHTQUIZ — Activation administrateur</title>
+  <link rel="stylesheet" href="./nightquiz-live.css">
+  <style>
+    body{min-height:100vh;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at 50% 0,#281848,transparent 34%),#09090e}
+    .admin-card{width:min(480px,100%);background:#111117;border:1px solid #2e2d38;border-radius:22px;padding:28px;box-shadow:0 30px 100px #0008}
+    .admin-card h1{font-size:32px;margin:18px 0 6px;letter-spacing:-.04em}.admin-card .btn{width:100%;margin-top:12px}
+    .admin-badge{display:inline-block;margin-top:18px;padding:7px 11px;border-radius:99px;background:#21172e;color:#b997ff;font-size:10px;font-weight:900}
+  </style>
+</head>
+<body>
+  <main class="admin-card">
+    <b class="logo">NIGHT<i>QUIZ</i></b>
+    <div class="admin-badge">SUPER ADMIN · ACTIVATION</div>
+    <h1>Créer l’accès administrateur</h1>
+    <p class="muted">Cette page est réservée à l’adresse administrateur autorisée dans NIGHTQUIZ.</p>
+    <form id="adminForm">
+      <div class="field">
+        <label>ADRESSE E-MAIL</label>
+        <input id="email" type="email" autocomplete="email" required>
+      </div>
+      <div class="field">
+        <label>MOT DE PASSE</label>
+        <input id="password" type="password" autocomplete="new-password" minlength="8" required>
+      </div>
+      <div id="message" class="notice" style="display:none"></div>
+      <button class="btn primary" id="submit" type="submit">Activer mon accès administrateur</button>
+    </form>
+    <a class="btn ghost" style="display:block;text-align:center;margin-top:10px" href="./">← Retour à NIGHTQUIZ</a>
+  </main>
+  <script type="module">
+    import{createClient}from'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/+esm';
+    const sb=createClient('https://otgubsvmcbaocrndngrq.supabase.co','sb_publishable__d50uWZVhfLcfzHv70ZOSA_QySE92AW',{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+    const form=document.getElementById('adminForm'),message=document.getElementById('message'),button=document.getElementById('submit');
+    const allowed='lannexebar14@icloud.com';
+    form.addEventListener('submit',async e=>{
+      e.preventDefault();
+      message.style.display='none';message.classList.remove('success');
+      const email=document.getElementById('email').value.trim().toLowerCase();
+      const password=document.getElementById('password').value;
+      if(email!==allowed){message.textContent='Cette adresse n’est pas autorisée comme administrateur NIGHTQUIZ.';message.style.display='block';return;}
+      button.disabled=true;button.textContent='Activation…';
+      try{
+        const{data,error}=await sb.auth.signUp({email,password,options:{data:{pseudo:'Admin NIGHTQUIZ'}}});
+        if(error)throw error;
+        if(data.session){message.textContent='Accès administrateur activé. Redirection…';message.classList.add('success');message.style.display='block';setTimeout(()=>location.href='./',700);}
+        else{message.textContent='Compte créé. Confirmez l’adresse e-mail reçue, puis revenez sur NIGHTQUIZ et cliquez sur Connexion.';message.classList.add('success');message.style.display='block';}
+      }catch(err){
+        const text=String(err?.message||'Impossible de créer le compte.');
+        message.textContent=text.toLowerCase().includes('already')?'Ce compte existe déjà. Retournez sur NIGHTQUIZ et utilisez Connexion.':text;
+        message.style.display='block';
+      }finally{button.disabled=false;button.textContent='Activer mon accès administrateur';}
+    });
+  </script>
+</body>
+</html>
