@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "",
+  "builds": [
+    { "src": "nightquiz-v1.html", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/", "dest": "/nightquiz-v1.html" },
+    { "src": "/nightquiz-v1.html", "dest": "/nightquiz-v1.html" }
+  ]
+}
